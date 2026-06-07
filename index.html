@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Mohit & Dhrumi — A Love Story</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:title" content="Mohit & Dhrumi — 24th July 2026">
+<meta property="og:description" content="From Melbourne to forever. You are invited to celebrate our wedding.">
+<meta property="og:image" content="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/Story/1.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+:root {
+  --cream:       #FBF6EE;
+  --cream-2:     #F4EADB;
+  --cream-3:     #EBDEC8;
+  --sage:        #A23A3A;        
+  --sage-dark:   #7A1F23;        
+  --sage-deep:   #4A0F13;        
+  --sage-light:  #C97474;        
+  --sage-pale:   #F8ECE6;        
+  --sage-border: #D9A4A4;        
+  --gold:        #B8893A;        
+  --gold-light:  #D9B463;        
+  --gold-pale:   #F0E2C2;        
+  --gold-rich:   #9C6B1A;        
+  --text-dark:   #1A0E0A;
+  --text-mid:    #4A3A35;
+  --text-light:  #8A7A70;
+  --border:      #E8D4C0;
+  --white:       #FFFFFF;
+  --shadow:      0 24px 64px -12px rgba(122,31,35,0.14);
+  --shadow-sm:   0 8px 24px rgba(122,31,35,0.09);
+  --shadow-deep: 0 30px 80px -20px rgba(122,31,35,0.22);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text-dark);font-family:'Cormorant Garamond',Georgia,serif;overflow-x:hidden}
+
+/* ── AUDIO BTN ─────────────────────────────────── */
+#audio-btn{position:fixed;bottom:28px;right:28px;z-index:9500;width:52px;height:52px;border-radius:50%;background:var(--white);border:1px solid var(--border);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .4s cubic-bezier(.175,.885,.32,1.275)}
+#audio-btn:hover{transform:scale(1.14)}
+#audio-btn svg{width:20px;height:20px;color:var(--sage-dark)}
+
+/* ── SHIMMER ───────────────────────────────────── */
+.shimmer{background:linear-gradient(105deg,var(--sage-deep) 15%,var(--sage-dark) 30%,var(--sage) 45%,#D4778A 55%,var(--sage-dark) 70%,var(--sage-deep) 85%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4.5s linear infinite}
+@keyframes shimmer{to{background-position:200% center}}
+
+/* ── PETALS ────────────────────────────────────── */
+#petals-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0;transition:opacity 2s ease}
+#petals-canvas.active{opacity:1}
+
+/* ── REVEAL ────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1.2s ease-out,transform 1.2s ease-out}
+.reveal.revealed{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.12s}
+.reveal-d2{transition-delay:.24s}
+.reveal-d3{transition-delay:.36s}
+
+/* ── ENTRY GATE (FIXED) ────────────────────────── */
+.entry-gate {
+  position:fixed;
+  inset:0;
+  background-color:#000;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.entry-gate video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+#main-content{visibility:hidden;opacity:0;transition:opacity 0.8s ease}
+
+/* ── GLOBALS ───────────────────────────────────── */
+.sec-label{font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.75rem}
+.sec-heading{font-family:'Great Vibes',cursive;font-size:clamp(3rem,9vw,5rem);line-height:1.1;color:var(--sage-dark);margin-bottom:.5rem}
+.tc{text-align:center}
+
+/* ── HERO ──────────────────────────────────────── */
+#hero{position:relative;min-height:100dvh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--cream-2);padding:3rem 1rem}
+#hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 120% 80% at 50% 0%,rgba(168,197,160,.18) 0%,transparent 65%)}
+.hero-corner{position:absolute;inset:1.25rem;pointer-events:none;z-index:2}
+.hero-corner::before,.hero-corner::after,.hero-corner span::before,.hero-corner span::after{content:'';position:absolute;width:54px;height:54px;border-color:var(--gold);border-style:solid;opacity:.7}
+.hero-corner::before{top:0;left:0;border-width:2px 0 0 2px}
+.hero-corner::after{top:0;right:0;border-width:2px 2px 0 0}
+.hero-corner span::before{bottom:0;left:0;border-width:0 0 2px 2px}
+.hero-corner span::after{bottom:0;right:0;border-width:0 2px 2px 0}
+
+.hero-card{position:relative;z-index:3;max-width:620px;width:100%;background:rgba(253,251,247,.93);backdrop-filter:blur(18px);border:1px solid rgba(194,168,120,.32);border-radius:2.2rem;padding:clamp(3rem,6vw,4rem) clamp(1.5rem,5vw,3rem);box-shadow:var(--shadow),0 0 0 4px rgba(197,138,150,.1) inset;text-align:center;display:flex;flex-direction:column;align-items:center;overflow:visible}
+
+/* Ganesha Block */
+.poem-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.ganesha-icon {
+  width: 50px; 
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 0.8rem;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 4px 10px rgba(184,137,58,0.4));
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+.poem-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.05rem, 3vw, 1.25rem);
+  color: var(--sage-deep);
+  line-height: 1.6;
+  text-align: center;
+  font-weight: 500;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.ardas-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--sage-dark);letter-spacing:.02em;line-height:1.6;margin-bottom:2.5rem;font-style:italic}
+.parent-sub{font-family:'Montserrat',sans-serif;font-size:.65rem;letter-spacing:.15em;color:var(--text-mid);text-transform:uppercase;margin-top:.4rem;display:block;line-height:1.4;}
+
+.couple-name{font-family:'Great Vibes',cursive;font-size:clamp(3.5rem,11vw,5.8rem);line-height:1.4;display:block;letter-spacing:.02em;width:100%;text-align:center;overflow:visible;white-space:nowrap;padding:0.4rem 0.5rem}
+
+.amp-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin:1.5rem 0;width:100%}
+.amp-line{height:1px;width:44px;background:var(--border)}
+.amp{font-family:'Great Vibes',cursive;font-size:2.6rem;color:var(--gold);line-height:1}
+
+/* Scroll Down Indicator */
+.scroll-indicator{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:10;opacity:0;animation:fadeIn 1.5s forwards 1.5s;cursor:pointer}
+.scroll-indicator span{font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--sage-dark)}
+.scroll-indicator svg{width:20px;height:20px;color:var(--sage-dark);animation:bounce 2s infinite}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}60%{transform:translateY(-4px)}}
+@keyframes fadeIn{to{opacity:1}}
+
+/* ── SCRATCH ───────────────────────────────────── */
+#scratch-section{padding:5rem 1.5rem 3rem;background:var(--cream);text-align:center;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.scratch-row{display:flex;justify-content:center;align-items:flex-start;gap:clamp(14px,4vw,30px);margin-top:2.5rem}
+.scratch-unit{display:flex;flex-direction:column;align-items:center;gap:12px}
+.scratch-lbl{font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--text-light)}
+
+.scratch-card{position:relative;width:clamp(88px,23vw,126px);height:clamp(128px,28vw,172px);border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--white);box-shadow:var(--shadow)}
+.scratch-card:not(.glow){animation:shake-hint 4s ease-in-out infinite;animation-delay:2s}
+@keyframes shake-hint{
+  0%,100%{transform:translateX(0) rotate(0)}
+  20%{transform:translateX(-3px) rotate(-2deg)}
+  40%{transform:translateX(3px) rotate(2deg)}
+  60%{transform:translateX(-3px) rotate(-2deg)}
+  80%{transform:translateX(3px) rotate(2deg)}
+}
+
+.scratch-card.glow{box-shadow:0 0 0 2px var(--sage-light),0 16px 40px rgba(124,154,126,.28);transition:box-shadow .8s}
+.scratch-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:var(--white);z-index:1}
+.sc-val{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(21px,5.5vw,32px);color:var(--sage-dark);line-height:1.1;text-align:center;padding:0 5px}
+.sc-rule{width:36px;height:1px;background:var(--sage-border);margin:5px auto 0}
+.scratch-canvas{position:absolute;inset:0;z-index:10;cursor:crosshair;touch-action:none}
+.scratch-hint{font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+
+/* ── LOCKED CONTENT ─────────────────────────────── */
+#locked{display:none;opacity:0;transform:translateY(36px);transition:opacity 1.5s ease,transform 1.5s ease}
+#locked.unlocked{display:block}
+#locked.visible{opacity:1;transform:none}
+
+/* ── COUNTDOWN ─────────────────────────────────── */
+#countdown-section{background:var(--cream);padding:3rem 1.5rem 5rem}
+.cd-card{max-width:460px;margin:0 auto;background:var(--white);border-radius:2.2rem;padding:3rem 2rem;border:1px solid var(--border);box-shadow:var(--shadow);text-align:center}
+.cd-quote{font-style:italic;font-size:1.15rem;line-height:1.65;color:var(--text-mid);margin-bottom:.5rem}
+.cd-script{font-family:'Great Vibes',cursive;font-size:3rem;color:var(--sage);line-height:1.2;display:block;margin-bottom:.25rem}
+.cd-date{font-family:'Montserrat',sans-serif;font-size:.78rem;letter-spacing:.22em;color:var(--sage-dark);text-transform:uppercase;margin-bottom:2.5rem;margin-top:1.25rem;display:block}
+.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.cd-unit{display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.cd-num{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,9vw,3.4rem);font-weight:300;color:var(--text-dark);line-height:1;position:relative}
+.cd-num::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--sage-light),transparent)}
+.cd-lbl{font-family:'Montserrat',sans-serif;font-size:.52rem;letter-spacing:.25em;text-transform:uppercase;color:var(--sage-dark)}
+
+/* ── LOVE STORY (CAROUSEL) ──── */
+#story-section{
+  padding:5rem 1.5rem 5.5rem;
+  background:linear-gradient(180deg,var(--cream) 0%,var(--sage-pale) 50%,var(--cream) 100%);
+  position:relative;
+  overflow:hidden;
+}
+#story-section::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  opacity:.4;
+}
+.story-intro{
+  text-align:center;
+  margin-bottom:2.5rem;
+  position:relative;
+  z-index:2;
+}
+.story-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(.95rem,2.4vw,1.1rem);
+  color:var(--text-mid);
+  max-width:560px;
+  margin:1.25rem auto 0;
+  line-height:1.65;
+  letter-spacing:.015em;
+  padding:0 1rem;
+}
+.kalasha-divider{
+  display:flex;align-items:center;justify-content:center;
+  gap:.85rem;margin:1rem auto;
+}
+.kalasha-divider .line{
+  height:1px;flex:0 0 70px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+}
+.kalasha-divider .gem{
+  width:8px;height:8px;background:var(--gold);
+  transform:rotate(45deg);
+  box-shadow:0 0 12px rgba(184,137,58,.5);
+}
+.kalasha-divider .gem.small{width:5px;height:5px;opacity:.6}
+
+.story-carousel-wrap{max-width:480px;margin:0 auto;position:relative}
+.story-carousel{
+  position:relative;
+  background:var(--white);
+  border-radius:1.75rem;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  border:1px solid var(--border);
+  touch-action:pan-y;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.story-track{
+  display:flex;width:100%;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1);
+  will-change:transform;
+}
+.story-slide{
+  flex:0 0 100%;
+  width:100%;
+  position:relative;
+  background:var(--cream-2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  aspect-ratio: 4 / 5;
+}
+
+/* ALL IMAGES SET TO EAGER LOAD */
+.story-slide img{
+  width:100%;
+  height:100%;
+  object-fit:contain; 
+  display:block;
+  margin:0 auto;
+}
+
+/* Arrows */
+.story-arrow{
+  position:absolute;top:50%;
+  transform:translateY(-50%);
+  width:42px;height:42px;
+  border-radius:50%;
+  background:rgba(255,248,240,.92);
+  border:1px solid var(--border);
+  box-shadow:0 4px 14px rgba(74,15,19,.18);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .25s ease;
+  z-index:5;
+  -webkit-tap-highlight-color:transparent;
+  padding:0;
+}
+.story-arrow:hover:not(:disabled){
+  background:var(--cream);
+  transform:translateY(-50%) scale(1.08);
+}
+.story-arrow:active:not(:disabled){transform:translateY(-50%) scale(.96)}
+.story-arrow svg{
+  width:16px;height:16px;
+  stroke:var(--sage-dark);
+  stroke-width:2;fill:none;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.story-arrow.prev{left:.75rem}
+.story-arrow.next{right:.75rem}
+.story-arrow:disabled{opacity:.4;cursor:not-allowed}
+
+/* Progress segments */
+.story-progress{
+  position:absolute;
+  top:0;left:0;right:0;
+  display:flex;gap:4px;
+  padding:.75rem .75rem 0;
+  z-index:4;
+  pointer-events:none;
+}
+.story-progress-seg{
+  flex:1;height:3px;
+  background:rgba(255,248,240,.4);
+  border-radius:2px;
+  overflow:hidden;position:relative;
+}
+.story-progress-seg::after{
+  content:'';position:absolute;inset:0;
+  background:var(--gold-light);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .4s ease;
+}
+.story-progress-seg.done::after{transform:scaleX(1)}
+.story-progress-seg.active::after{
+  transform:scaleX(1);
+  background:var(--gold);
+}
+
+/* Dot navigation */
+.story-dots{
+  display:flex;justify-content:center;
+  gap:.55rem;margin-top:1.6rem;
+  padding:0 1rem;flex-wrap:wrap;
+}
+.story-dot{
+  width:9px;height:9px;
+  border-radius:50%;
+  background:var(--gold-pale);
+  border:1px solid var(--border);
+  cursor:pointer;
+  transition:all .3s ease;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+.story-dot:hover{
+  background:var(--gold-light);
+  transform:scale(1.15);
+}
+.story-dot.active{
+  background:var(--gold);
+  width:30px;
+  border-radius:5px;
+  border-color:var(--gold-rich);
+  box-shadow:0 0 0 2px rgba(184,137,58,.18);
+}
+
+/* Counter */
+.story-counter{
+  text-align:center;
+  font-family:'Montserrat',sans-serif;
+  font-size:.62rem;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:var(--text-light);
+  margin-top:1.1rem;
+}
+.story-counter .current{
+  color:var(--sage-dark);
+  font-weight:500;
+}
+
+.story-swipe-hint{
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:.85rem;
+  color:var(--text-light);
+  margin-top:.7rem;
+  opacity:.85;
+}
+@media(min-width:541px){.story-swipe-hint{display:none}}
+
+/* ── OUR MOMENTS (HORIZONTAL PARALLAX) ─────────── */
+.moments-section { background: var(--cream); position: relative; height: 100vh; width: 100%; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+.moments-bg-text {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  justify-content: center; pointer-events: none; overflow: hidden; opacity: 0.04;
+}
+.moments-bg-text span {
+  font-family: 'Great Vibes', cursive; font-size: 6rem;
+  white-space: nowrap; color: var(--sage-dark); line-height: 1;
+}
+.moments-container { width: 100%; height: 100%; overflow: hidden; }
+.moments-track { display: flex; height: 100%; will-change: transform; }
+.moments-panel {
+  flex: 0 0 100vw; width: 100vw; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;
+}
+.moments-header { text-align: center; }
+.pcard {
+  background: var(--white); padding: 14px 14px 50px; border-radius: 3px;
+  box-shadow: var(--shadow-deep); max-width: 340px; width: 82vw;
+  position: relative;
+}
+.pcard img {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; border-radius: 2px;
+}
+.pcard-caption {
+  position: absolute; bottom: 14px; left: 0; right: 0; text-align: center;
+  font-family: 'Great Vibes', cursive; font-size: 1.7rem; color: var(--sage-dark);
+}
+.moments-hint { font-family:'Montserrat',sans-serif; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-light); margin-top:1.2rem; }
+
+/* ── EVENTS ─────────────────────────────────────── */
+#events-section{padding:5rem 1.5rem;background:var(--cream);border-top:1px solid var(--border)}
+.day-header{font-family:'Montserrat',sans-serif;font-size:.9rem;letter-spacing:.18em;color:var(--sage-dark);text-align:center;margin:4rem 0 2rem;border-bottom:1px solid var(--border);padding-bottom:1rem;text-transform:uppercase}
+.day-header.sage-day{color:var(--sage-dark);border-color:var(--sage-border);background:var(--sage-pale);border-radius:.5rem;padding:1.5rem;border:1px solid var(--sage-border);box-shadow:var(--shadow-sm)}
+.event-block{max-width:440px;margin:0 auto 2.5rem}
+.evt-video{border-radius:1.5rem;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);background:#111;max-height:240px;transition:max-height 1.4s cubic-bezier(.25,1,.5,1)}
+.evt-video.open{max-height:900px}
+.evt-video video{width:100%;height:auto;display:block}
+.evt-card{max-width:440px;margin:1.25rem auto 0;background:var(--white);border-radius:1.25rem;border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow-sm)}
+.evt-card.sage{background:linear-gradient(135deg,var(--sage-pale),var(--white));border-color:var(--sage-border)}
+.evt-info{padding:1.5rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;text-align:center}
+.evt-name{font-family:'Great Vibes',cursive;font-size:clamp(2rem,5.5vw,2.8rem);color:var(--sage-dark);line-height:1.15}
+.evt-card.sage .evt-name{color:var(--sage-deep)}
+.evt-time{font-family:'Montserrat',sans-serif;font-size:.68rem;letter-spacing:.2em;color:var(--sage);text-transform:uppercase;margin:3px 0}
+.evt-addr{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--sage-dark);line-height:1.55}
+.dir-btn{display:inline-flex;align-items:center;gap:6px;background:var(--sage-dark);color:#fff;text-decoration:none;padding:.58rem 1.3rem;border-radius:9999px;font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;transition:all .25s;margin-top:8px}
+.dir-btn:hover{background:var(--sage-deep);transform:translateY(-2px);box-shadow:0 4px 14px rgba(74,15,19,.32)}
+.dir-btn svg{width:13px;height:13px}
+
+/* ── GAME & RSVP (Integrated with index20 style) ── */
+.form-card{max-width:440px;margin:1.25rem auto;background:var(--white);border-radius:1.25rem;border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow-sm);padding:2rem}
+.form-card-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--sage-dark);text-align:center;margin-bottom:0.4rem;font-style:italic;}
+.form-card-subtitle{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text-mid);text-align:center;margin-bottom:1.5rem;font-style:italic;}
+
+.field-group{margin-bottom:1.2rem;}
+.field-label{display:block;font-family:'Montserrat',sans-serif;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);margin-bottom:.5rem}
+.field-input, .text-area, select.field-input{width:100%;padding:1rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-dark);background:var(--cream);border:1px solid var(--border);border-radius:10px;outline:none;transition:border 0.25s ease, box-shadow 0.25s ease;}
+.field-input:focus, .text-area:focus, select.field-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,137,58,0.12);}
+.text-area{resize:vertical;line-height:1.5;}
+
+.radio-pill-row, .mood-grid{display:flex;gap:0.7rem;flex-wrap:wrap;}
+.radio-pill, .mood-opt{flex:1 1 auto;min-width:130px;text-align:center;padding:0.75rem 0.8rem;border:1px solid var(--border);border-radius:40px;cursor:pointer;font-size:1rem;color:var(--text-mid);background:var(--cream);transition:all 0.25s ease;}
+.radio-pill input, .mood-opt input, .checkbox-pill input{display:none;}
+.radio-pill:has(input:checked), .mood-opt:has(input:checked){background:var(--sage-dark);color:var(--cream);border-color:var(--sage-dark);}
+
+.checkbox-row{display:flex;flex-direction:column;gap:0.6rem;}
+.checkbox-pill{display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1rem;border:1px solid var(--border);border-radius:10px;cursor:pointer;background:var(--cream);transition:all 0.25s ease;}
+.checkbox-pill span{font-size:1.08rem;color:var(--text-dark);display:block;}
+.checkbox-date{font-family:'Montserrat',sans-serif;font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);}
+.checkbox-pill::after{content:'';width:22px;height:22px;flex:0 0 22px;border-radius:6px;border:1.5px solid var(--gold);margin-left:0.8rem;transition:all 0.25s ease;}
+.checkbox-pill:has(input:checked){border-color:var(--gold);background:var(--gold-pale);}
+.checkbox-pill:has(input:checked)::after{background:var(--sage-dark) url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23E8C07A' stroke-width='3'><path d='M5 13l4 4L19 7' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/14px no-repeat;border-color:var(--sage-dark);}
+
+.submit-btn{width:100%;padding:1.2rem;border:none;border-radius:40px;background:var(--sage-dark);color:var(--cream);font-family:'Montserrat',sans-serif;font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;box-shadow:var(--shadow-sm);transition:transform 0.25s ease,opacity 0.25s ease;}
+.submit-btn:hover{transform:translateY(-2px);background:var(--sage-deep);}
+.submit-btn:disabled{opacity:0.7;cursor:not-allowed;transform:none;}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{animation:spin 1s linear infinite}
+
+#rsvp-modal{position:fixed;inset:0;background:rgba(30,10,5,0.65);backdrop-filter:blur(10px);z-index:9000;display:none;align-items:center;justify-content:center;padding:1.5rem}
+#rsvp-modal.open{display:flex}
+.modal-card{background:var(--white);border-radius:1.5rem;max-width:360px;width:100%;padding:2.5rem 2rem 2rem;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.25);animation:modalIn 0.4s cubic-bezier(0.16,1,0.3,1) both}
+@keyframes modalIn{from{opacity:0;transform:scale(0.9) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-icon-ring{width:72px;height:72px;border-radius:50%;background:rgba(122,31,35,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem}
+.modal-icon-ring svg{width:32px;color:var(--sage-dark)}
+.modal-title{font-family:'Great Vibes',cursive;font-size:3rem;color:var(--sage-dark);margin-bottom:0.5rem}
+.modal-msg{font-style:italic;font-family:'Cormorant Garamond',serif;color:var(--text-light);font-size:1.1rem;line-height:1.6;margin-bottom:1.75rem}
+.modal-close-btn{background:var(--sage-dark);color:var(--cream);border:none;border-radius:9999px;padding:0.85rem 2.5rem;font-family:'Montserrat',sans-serif;font-weight:600;font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:background 0.2s ease;width:100%}
+.modal-close-btn:hover{background:var(--sage-deep)}
+
+/* ── GAME STYLES ───────────────────────────────── */
+.game-shell { max-width: 440px; margin: 2.4rem auto 0; }
+.game-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; font-family:'Montserrat',sans-serif; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sage-dark); }
+.game-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7rem; }
+.mcard { aspect-ratio: 1; perspective: 700px; cursor: pointer; }
+.mcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s cubic-bezier(0.4,0.2,0.2,1); transform-style: preserve-3d; }
+.mcard.flipped .mcard-inner, .mcard.matched .mcard-inner { transform: rotateY(180deg); }
+.mcard-face { position: absolute; inset: 0; border-radius: 12px; display: flex; align-items: center; justify-content: center; backface-visibility: hidden; -webkit-backface-visibility: hidden; font-size: clamp(1.3rem, 7vw, 1.8rem); box-shadow: var(--shadow-sm); }
+.mcard-back { background: var(--sage-dark); color: var(--gold-light); font-family:'Cormorant Garamond',serif; font-style:italic; border: 1px solid var(--sage-border); }
+.mcard-front { background: var(--white); border: 1px solid var(--border); transform: rotateY(180deg); }
+.mcard.matched .mcard-front { box-shadow: 0 0 0 2px var(--gold); background: var(--gold-pale); }
+.game-win { text-align: center; margin-top: 1.5rem; font-style: italic; color: var(--sage); font-size: 1.25rem; opacity: 0; transition: opacity 0.5s ease; height: 0; }
+.game-win.show { opacity: 1; height: auto; }
+.game-reset { display: block; margin: 1.4rem auto 0; padding: 0.6rem 1.6rem; font-family:'Montserrat',sans-serif; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; background: transparent; color: var(--sage-dark); border: 1px solid var(--gold); border-radius: 40px; cursor: pointer; transition: all 0.3s ease; }
+.game-reset:hover { background: var(--sage-dark); color: var(--gold-light); }
+
+
+/* ── FOOTER ──────────────────────────────────────── */
+#footer-section{background:var(--sage-deep);padding:5rem 1.5rem 2rem;color:#fff;text-align:center}
+.footer-name{font-family:'Great Vibes',cursive;font-size:clamp(3rem,10vw,4.5rem);color:var(--gold-light);display:block;line-height:1.1;margin:1rem 0}
+.footer-msg{font-style:italic;font-size:1.1rem;line-height:1.7;max-width:580px;margin:0 auto 2rem;opacity:.88}
+
+/* ── Invite Vibes Credit ─────────────────────────── */
+.invite-vibes-credit {
+  text-align: center;
+  padding: 18px 12px;
+  font-size: 13px;
+  opacity: 0.75;
+  margin-top: 3.5rem;
+  animation: ivFloating 3s ease-in-out infinite;
+  color: #fff;
+  line-height: 1.6;
+}
+.invite-vibes-credit a {
+  color: inherit;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+.invite-vibes-credit a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+@keyframes ivFloating {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media(max-width:480px){
+  .hero-card{padding:2.5rem 1.25rem;}
+  .evt-info{padding:1.25rem;}
+  .form-card{padding:1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<audio id="bg-audio" loop preload="auto">
+  <source src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/common-assets/Background%20audio%2C%20lenghty.mp3" type="audio/mpeg">
+</audio>
+
+<button id="audio-btn" title="Toggle music">
+  <svg id="a-on" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+  </svg>
+  <svg id="a-off" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+  </svg>
+</button>
+
+<canvas id="petals-canvas"></canvas>
+
+<div id="entry-gate" class="entry-gate">
+  <video
+    id="entry-video"
+    src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/Best%20Entry%20Video%20(15).mp4#t=0.001"
+    playsinline
+    webkit-playsinline
+    muted
+    preload="auto"
+    data-autoplay-fix="true"
+  ></video>
+</div>
+
+<div id="main-content">
+
+  <section id="hero">
+    <div class="hero-corner"><span></span></div>
+    <div class="hero-card">
+
+      <div class="poem-block">
+        <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/may/Hemadri%20%26%20Ravindra/GAnesha%20Icon.png" alt="Lord Ganesha" class="ganesha-icon">
+        <p class="poem-text">
+          Vakratunda Mahakaya<br>Suryakoti Samaprabha<br>Nirvighnam Kuru Me Deva<br>Sarva-Karyeshu Sarvada
+        </p>
+      </div>
+
+      <p class="ardas-text">With hearts full of joy and the blessings of our elders,<br>we invite you to celebrate the wedding of</p>
+
+      <span class="couple-name shimmer">Dhrumi</span>
+      <span class="parent-sub">Daughter of Mr. Chetankumar S. Lakdawala & Mrs. Jagruti C. Lakdawala</span>
+
+      <div class="amp-row">
+        <div class="amp-line"></div>
+        <span class="amp">weds</span>
+        <div class="amp-line"></div>
+      </div>
+
+      <span class="couple-name shimmer">Mohit</span>
+      <span class="parent-sub">Son of Late Mr. Ravi Mehta & Mrs. Rajni Bala</span>
+    </div>
+
+    <div class="scroll-indicator" onclick="document.getElementById('scratch-section').scrollIntoView({behavior:'smooth'})">
+      <span>Scroll to Reveal</span>
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+    </div>
+  </section>
+
+  <section id="scratch-section" class="reveal">
+    <span class="sec-label">A Little Surprise</span>
+    <h2 class="sec-heading">Save the Date</h2>
+    <p style="font-style:italic;color:var(--text-light);font-size:1.05rem;margin-top:.25rem">Scratch below to reveal our wedding date</p>
+
+    <div class="scratch-row">
+      <div class="scratch-unit">
+        <span class="scratch-lbl">Month</span>
+        <div class="scratch-card" id="card-1">
+          <div class="scratch-inner"><div class="sc-val">July</div><div class="sc-rule"></div></div>
+          <canvas class="scratch-canvas" id="sc-1"></canvas>
+        </div>
+        <span class="scratch-hint" id="hint-1">↑ scratch</span>
+      </div>
+      <div class="scratch-unit">
+        <span class="scratch-lbl">Day</span>
+        <div class="scratch-card" id="card-2">
+          <div class="scratch-inner"><div class="sc-val">24</div><div class="sc-rule"></div></div>
+          <canvas class="scratch-canvas" id="sc-2"></canvas>
+        </div>
+        <span class="scratch-hint" id="hint-2" style="animation-delay:.18s">↑ scratch</span>
+      </div>
+      <div class="scratch-unit">
+        <span class="scratch-lbl">Year</span>
+        <div class="scratch-card" id="card-3">
+          <div class="scratch-inner"><div class="sc-val">2026</div><div class="sc-rule"></div></div>
+          <canvas class="scratch-canvas" id="sc-3"></canvas>
+        </div>
+        <span class="scratch-hint" id="hint-3" style="animation-delay:.36s">↑ scratch</span>
+      </div>
+    </div>
+  </section>
+
+  <div id="locked">
+
+   <section id="countdown-section">
+      <div class="cd-card">
+        <p class="cd-quote">A new chapter, woven with two hearts and the blessings of family</p>
+        <span class="cd-script">The Wedding Day</span>
+        <span class="cd-date">24 · 07 · 2026</span>
+        <div class="cd-grid">
+          <div class="cd-unit"><span class="cd-num" id="cd-days">00</span><span class="cd-lbl">Days</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cd-hours">00</span><span class="cd-lbl">Hours</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cd-mins">00</span><span class="cd-lbl">Mins</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cd-secs">00</span><span class="cd-lbl">Secs</span></div>
+        </div>
+      </div>
+
+      <div onclick="document.getElementById('story-section').scrollIntoView({behavior:'smooth'})" style="display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 3.5rem; cursor: pointer;">
+        <span style="font-family: 'Montserrat', sans-serif; font-size: .6rem; letter-spacing: .25em; text-transform: uppercase; color: var(--sage-dark);">Our Story</span>
+        <svg style="width: 20px; height: 20px; color: var(--sage-dark); animation: bounce 2s infinite;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+
+   </section>
+
+    <section id="story-section">
+      <div class="story-intro reveal">
+        <span class="sec-label">From Melbourne to Forever</span>
+        <h2 class="sec-heading">Our Love<br>Story</h2>
+        <div class="kalasha-divider">
+          <span class="line"></span>
+          <span class="gem small"></span>
+          <span class="gem"></span>
+          <span class="gem small"></span>
+          <span class="line"></span>
+        </div>
+        <p class="story-quote">
+          "Swipe through our journey, chapter by chapter."
+        </p>
+      </div>
+
+      <div class="story-carousel-wrap reveal reveal-d2">
+        <div class="story-carousel" id="story-carousel"
+             role="region" aria-roledescription="carousel" aria-label="Mohit and Dhrumi's love story">
+
+          <div class="story-progress" id="story-progress" aria-hidden="true"></div>
+
+          <div class="story-track" id="story-track">
+
+            <div class="story-slide" role="group" aria-roledescription="slide" aria-label="Chapter 1 of 8">
+              <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/Story/1.png"
+                   alt="Dhrumi & Mohit" loading="eager" decoding="async">
+            </div>
+
+            <div class="story-slide" role="group" aria-roledescription="slide" aria-label="Chapter 2 of 8">
+              <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/Story/2.png"
+                   alt="Melbourne" loading="eager" decoding="async">
+            </div>
+
+            <div class="story-slide" role="group" aria-roledescription="slide" aria-label="Chapter 3 of 8">
+              <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/Story/3.png"
+                   alt="Friendship" loading="eager" decoding="async">
+            </div>
+
+            <div class="story-slide" role="group" aria-roledescription="slide" aria-label="Chapter 4 of 8">
+              <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/Story/4.png"
+                   alt="Bali" loading="eager" decoding="async">
+            </div>
+
+            <div class="story-slide" role="group" aria-roledescription="slide" aria-label="Chapter 5 of 8">
+              <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/Story/5.png"
+                   alt="Surat & Melbourne" loading="eager" decoding="async">
+            </div>
+
+            <div class="story-slide" role="group" aria-roledescription="slide" aria-label="Chapter 6 of 8">
+              <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/Story/6.png"
+                   alt="Long distance" loading="eager" decoding="async">
+            </div>
+
+            <div class="story-slide" role="group" aria-roledescription="slide" aria-label="Chapter 7 of 8">
+              <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/Story/7.png"
+                   alt="Brisbane" loading="eager" decoding="async">
+            </div>
+
+            <div class="story-slide" role="group" aria-roledescription="slide" aria-label="Chapter 8 of 8">
+              <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/Story/8.png"
+                   alt="New Zealand" loading="eager" decoding="async">
+            </div>
+
+          </div>
+
+          <button class="story-arrow prev" id="story-prev" aria-label="Previous chapter" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <button class="story-arrow next" id="story-next" aria-label="Next chapter" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+
+        <div class="story-dots" id="story-dots" role="tablist" aria-label="Story chapter navigation"></div>
+
+        <p class="story-counter" aria-live="polite" aria-atomic="true">
+          <span class="current" id="story-current">01</span>
+          <span style="margin:0 .4em;opacity:.5;">/</span>
+          <span id="story-total">08</span>
+        </p>
+
+        <p class="story-swipe-hint">← swipe to read our story →</p>
+      </div>
+    </section>
+
+    <section class="moments-section" id="moments-pin-trigger">
+        <div class="moments-bg-text" aria-hidden="true">
+            <span>forever forever forever forever</span>
+            <span>forever forever forever forever</span>
+            <span>forever forever forever forever</span>
+        </div>
+        <div class="moments-container">
+            <div class="moments-track" id="moments-track" style="width:600vw;">
+
+                <div class="moments-panel">
+                    <div class="moments-header reveal">
+                        <span class="sec-label">A Glimpse of Us</span>
+                        <h2 class="sec-heading">Our Beautiful<br>Moments</h2>
+                        <p class="moments-hint">Keep scrolling to view ›</p>
+                    </div>
+                </div>
+
+                <div class="moments-panel">
+                    <div class="pcard" style="transform:rotate(-3deg);">
+                        <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/IMG_1275.JPG%20(1).jpeg" alt="Mohit & Dhrumi" loading="eager" decoding="async">
+                        <div class="pcard-caption">Us</div>
+                    </div>
+                </div>
+                <div class="moments-panel">
+                    <div class="pcard" style="transform:rotate(2deg);">
+                        <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/IMG_2328%20(1).jpg" alt="Together" loading="eager" decoding="async">
+                        <div class="pcard-caption">Together</div>
+                    </div>
+                </div>
+                <div class="moments-panel">
+                    <div class="pcard" style="transform:rotate(-2deg);">
+                        <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/IMG_3915%20(1).JPEG" alt="In love" loading="eager" decoding="async">
+                        <div class="pcard-caption">Always</div>
+                    </div>
+                </div>
+                <div class="moments-panel">
+                    <div class="pcard" style="transform:rotate(2.5deg);">
+                        <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/IMG_6573.JPG%20(1).jpeg" alt="Our story" loading="eager" decoding="async">
+                        <div class="pcard-caption">Forever</div>
+                    </div>
+                </div>
+                <div class="moments-panel">
+                    <div class="pcard" style="transform:rotate(-1.5deg);">
+                        <img src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/IMG_2674%20(1).jpg" alt="Now & forever" loading="eager" decoding="async">
+                        <div class="pcard-caption">& ever</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="events-section">
+      <div class="tc reveal" style="margin-bottom:1rem">
+        <span class="sec-label">The Celebrations Unfold</span>
+        <h2 class="sec-heading">Wedding Festivities</h2>
+      </div>
+
+      <h3 class="day-header reveal">Day 1  ·  23.07.2026  ·  Thursday</h3>
+
+      <div class="event-block reveal">
+        <div class="evt-video" id="ev1">
+          <video autoplay muted loop playsinline>
+            <source src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/223.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="evt-card reveal reveal-d1">
+          <div class="evt-info">
+            <span class="evt-name">Mehndi</span>
+            <span class="evt-time">From 12:00 PM onwards</span>
+            <span class="evt-addr">Ravi Niwas (Our Home)<br><br>Dress Code: Vibrant Colours 🌈</span>
+            <a class="dir-btn" href="https://maps.app.goo.gl/G9TZYAZ8CLVdL2KM8?g_st=ic" target="_blank" rel="noopener noreferrer">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              View on Map
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-block reveal" style="margin-top:3rem;">
+        <div class="evt-video" id="ev2">
+          <video autoplay muted loop playsinline>
+            <source src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/224.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="evt-card reveal reveal-d1">
+          <div class="evt-info">
+            <span class="evt-name">Haldi & Family Night</span>
+            <span class="evt-time">From 4:00 PM onwards</span>
+            <span class="evt-addr" style="font-size:0.9rem;">Ravi Niwas (Our Home)<br><br>Dress Code: Ivory, Cream & White 🤍<br><span style="font-style:italic;opacity:0.8">(Not forcing the dress code… just gently blackmailing everyone for aesthetic pictures.)</span></span>
+            <a class="dir-btn" href="https://maps.app.goo.gl/G9TZYAZ8CLVdL2KM8?g_st=ic" target="_blank" rel="noopener noreferrer">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              View on Map
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="day-header sage-day reveal" style="padding:2rem 1.5rem; margin-top:4rem;">
+        ✦  Day 2 · 24.07.2026 · Friday · The Wedding Day  ✦
+      </h3>
+
+      <div class="event-block reveal">
+        <div class="evt-video" id="ev3">
+          <video autoplay muted loop playsinline>
+            <source src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/225.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="evt-card sage reveal reveal-d1">
+          <div class="evt-info">
+            <span class="evt-name" style="font-size:clamp(2.4rem,6vw,3.2rem)">The Wedding</span>
+            <span class="evt-time" style="color:var(--sage-dark)">From 12:00 PM onwards</span>
+            <span class="evt-addr">Plunkett Villa Tamborine<br><br>Dress Code: Indian Traditional Attire</span>
+            <a class="dir-btn" href="https://maps.app.goo.gl/1LSvDn5HfRy5KKP66?g_st=ic" target="_blank" rel="noopener noreferrer">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              View on Map
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-block reveal" style="margin-top:3rem;">
+        <div class="evt-video" id="ev4">
+          <video autoplay muted loop playsinline>
+            <source src="https://pub-1953a6673e864f3488c645252f75de98.r2.dev/June/Mohit%20%26%20Dhrumi%20-%20Ritika/226.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="evt-card reveal reveal-d1">
+          <div class="evt-info">
+            <span class="evt-name">After Wedding Party</span>
+            <span class="evt-time">At 5:30 PM</span>
+            <span class="evt-addr">Plunkett Villa Tamborine<br><br>Dress Code: Indo Western</span>
+            <a class="dir-btn" href="https://maps.app.goo.gl/1LSvDn5HfRy5KKP66?g_st=ic" target="_blank" rel="noopener noreferrer">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              View on Map
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="game-section" style="padding:4rem 1.5rem; background:var(--cream-2)">
+        <div class="tc reveal">
+            <span class="sec-label">While You Wait</span>
+            <h2 class="sec-heading">Memory Match</h2>
+            <p style="font-style:italic;color:var(--text-light);font-size:1.1rem;margin-top:0.5rem;">
+                Find all the matching pairs — just like we found each other.
+            </p>
+        </div>
+
+        <div class="game-shell reveal reveal-d2">
+            <div class="game-meta">
+                <span>Moves: <b id="game-moves">0</b></span>
+                <span>Pairs: <b id="game-pairs">0</b> / 8</span>
+            </div>
+            <div class="game-grid" id="game-grid"></div>
+            <p class="game-win" id="game-win">You found them all — true love wins! 💍</p>
+            <button class="game-reset" id="game-reset">Play again</button>
+        </div>
+    </section>
+
+    <section id="rsvp-section" style="padding:4rem 1.5rem 6rem; background:var(--cream)">
+        <div class="tc reveal">
+            <span class="sec-label">Join the Celebration</span>
+            <h2 class="sec-heading">Rsvp</h2>
+            <p style="font-style:italic;color:var(--text-light);font-size:1.1rem;margin-bottom:2rem;">
+                A few quick questions before the big day.
+            </p>
+        </div>
+
+        <form id="rsvp-form" class="rsvp-form">
+            <div class="form-card reveal">
+                <p class="form-card-title">Your Details</p>
+                <div class="field-group">
+                    <label class="field-label" for="f-name">Your Name</label>
+                    <input class="field-input" type="text" id="f-name" name="name" required placeholder="Full name">
+                </div>
+                <div class="field-group">
+                    <label class="field-label" for="f-phone">Phone Number</label>
+                    <input class="field-input" type="tel" id="f-phone" name="phone" required placeholder="+91 00000 00000">
+                </div>
+            </div>
+
+            <div class="form-card reveal reveal-d1">
+                <p class="form-card-title">Will you join us?</p>
+                <div class="radio-pill-row">
+                    <label class="radio-pill"><input type="radio" name="attending" value="yes" checked> Joyfully Accept 🎉</label>
+                    <label class="radio-pill"><input type="radio" name="attending" value="no"> Regretfully Decline</label>
+                </div>
+            </div>
+
+            <div class="form-card reveal reveal-d1" id="guests-card">
+                <p class="form-card-title">Party Size</p>
+                <p class="form-card-subtitle">Including yourself, how many guests?</p>
+                <select class="field-input" name="guest_count">
+                    <option value="1">1 (Just me)</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5 Guests</option>
+                    <option value="6+">6+ Guests</option>
+                </select>
+            </div>
+
+            <div class="form-card reveal reveal-d1" id="events-card">
+                <p class="form-card-title">Events You'll Attend</p>
+                <p class="form-card-subtitle">Tick the celebrations you'll be joining.</p>
+                <div class="checkbox-row">
+                    <label class="checkbox-pill">
+                        <div><span>Mehndi</span><small class="checkbox-date">July 23 · 12 PM onwards</small></div>
+                        <input type="checkbox" name="events[]" value="Mehndi">
+                    </label>
+                    <label class="checkbox-pill">
+                        <div><span>Haldi & Family Night</span><small class="checkbox-date">July 23 · 4 PM onwards</small></div>
+                        <input type="checkbox" name="events[]" value="Haldi & Family Night">
+                    </label>
+                    <label class="checkbox-pill">
+                        <div><span>The Wedding</span><small class="checkbox-date">July 24 · 12 PM onwards</small></div>
+                        <input type="checkbox" name="events[]" value="Wedding">
+                    </label>
+                    <label class="checkbox-pill">
+                        <div><span>After Wedding Party</span><small class="checkbox-date">July 24 · 5:30 PM</small></div>
+                        <input type="checkbox" name="events[]" value="After Wedding Party">
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-card reveal reveal-d2" id="mood-card">
+                <p class="form-card-title">Your Wedding Mood</p>
+                <p class="form-card-subtitle">I'm mainly coming for…</p>
+                <div class="mood-grid">
+                    <label class="mood-opt"><input type="radio" name="wedding_mood" value="The Food"> The Food 🍽️</label>
+                    <label class="mood-opt"><input type="radio" name="wedding_mood" value="The Dance Floor"> Dance Floor 💃</label>
+                    <label class="mood-opt"><input type="radio" name="wedding_mood" value="The Love"> The Love ❤️</label>
+                    <label class="mood-opt"><input type="radio" name="wedding_mood" value="All of It"> All of It ✨</label>
+                </div>
+            </div>
+
+            <div class="form-card reveal reveal-d3">
+                <p class="form-card-title">Leave Us a Note</p>
+                <p class="form-card-subtitle">Share a wish, a memory, or a blessing.</p>
+                <textarea class="text-area" name="message" rows="3" placeholder="Write something from the heart…"></textarea>
+            </div>
+
+            <div class="reveal reveal-d3" style="max-width:440px; margin:0 auto;">
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    <span id="btn-text">Send Love</span>
+                    <svg id="btn-spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;vertical-align:middle;margin-left:8px;" class="spin">
+                        <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0110 10" stroke-opacity="0.75"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section id="footer-section">
+      <div class="tc reveal">
+        <span style="font-size:2.4rem;display:block;margin-bottom:1rem;opacity:.75;">💍</span>
+        <p class="footer-msg">
+          Bound by sacred vows, blessed by two loving families, and graced by the Almighty —<br>we begin our forever with grateful, joyful hearts.<br><br>
+          We cannot wait to celebrate this beautiful chapter with you.
+        </p>
+        <span class="footer-name">Dhrumi & Mohit</span>
+      </div>
+      
+      <div class="invite-vibes-credit">
+        Made with ❤️ by NH<br>
+        <a href="tel:6204393750">6204393750</a>
+      </div>
+    </section>
+
+  </div></div>
+
+<div id="rsvp-modal">
+    <div class="modal-card">
+        <div class="modal-icon-ring" id="modal-icon">
+            <svg id="modal-success-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            <svg id="modal-error-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;color:#dc2626"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </div>
+        <h3 class="modal-title" id="modal-title">Thank You!</h3>
+        <p class="modal-msg" id="modal-msg">We can't wait to celebrate with you!</p>
+        <button class="modal-close-btn" id="modal-close">Close</button>
+    </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════
+   AUDIO & TAB SWITCH LOGIC
+══════════════════════════════════════════════════ */
+const bgAudio = document.getElementById('bg-audio');
+const aOn = document.getElementById('a-on'), aOff = document.getElementById('a-off');
+let playing = false;
+
+function setAudio(on) {
+  if (on) {
+    if (bgAudio.readyState === 0) bgAudio.load();
+    bgAudio.play().then(() => { playing=true; aOn.style.display='block'; aOff.style.display='none'; }).catch(()=>{});
+  } else {
+    bgAudio.pause(); playing=false; aOn.style.display='none'; aOff.style.display='block';
+  }
+}
+document.getElementById('audio-btn').addEventListener('click', () => setAudio(!playing));
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    if (playing) bgAudio.pause();
+  } else {
+    if (playing) bgAudio.play().catch(()=>{});
+  }
+});
+
+/* ══════════════════════════════════════════════════
+   PETALS
+══════════════════════════════════════════════════ */
+(function() {
+  const cvs = document.getElementById('petals-canvas');
+  const ctx = cvs.getContext('2d');
+  const COLORS = ['#F8ECE6','#D9A4A4','#C97474','#F0E2C2','#D9B463'];
+  const N = window.innerWidth < 600 ? 22 : 40;
+  function resize() { cvs.width = innerWidth; cvs.height = innerHeight; }
+  resize(); window.addEventListener('resize', resize, {passive:true});
+  class Petal {
+    constructor(init) {
+      this.x = Math.random() * cvs.width;
+      this.y = init ? Math.random() * cvs.height * 2 - cvs.height : -20;
+      this.r = 4 + Math.random() * 5;
+      this.vx = (Math.random() - .5) * .8;
+      this.vy = .6 + Math.random() * 1.1;
+      this.rot = Math.random() * Math.PI * 2;
+      this.drot = (Math.random() - .5) * .04;
+      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      this.alpha = .5 + Math.random() * .4;
+    }
+    update() {
+      this.x += this.vx + Math.sin(this.y * .01) * .35;
+      this.y += this.vy; this.rot += this.drot;
+      if (this.y > cvs.height + 20) { this.x = Math.random()*cvs.width; this.y = -20; }
+    }
+    draw() {
+      ctx.save(); ctx.translate(this.x,this.y); ctx.rotate(this.rot);
+      ctx.globalAlpha = this.alpha; ctx.fillStyle = this.color;
+      ctx.beginPath(); ctx.ellipse(0,0,this.r*.55,this.r,0,0,Math.PI*2); ctx.fill(); ctx.restore();
+    }
+  }
+  const petals = Array.from({length:N}, (_,i)=>new Petal(true));
+  function loop() { ctx.clearRect(0,0,cvs.width,cvs.height); petals.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(loop); }
+  loop();
+})();
+
+/* ══════════════════════════════════════════════════
+   AUTO-SCROLL
+══════════════════════════════════════════════════ */
+let userInteracted = false, autoScrollTo;
+function handleInteract() {
+  userInteracted = true;
+  clearTimeout(autoScrollTo);
+  ['wheel','touchstart','mousedown','keydown'].forEach(e=>window.removeEventListener(e,handleInteract));
+}
+function smoothScroll(endY, dur) {
+  const startY = window.scrollY, dist = endY - startY;
+  let t0 = null, rafId;
+  function step(now) {
+    if (userInteracted) { cancelAnimationFrame(rafId); return; }
+    if (!t0) t0 = now;
+    const elapsed = now - t0;
+    let t = elapsed / (dur/2), run;
+    if (t < 1) run = dist/2*t*t*t + startY;
+    else { t-=2; run = dist/2*(t*t*t+2)+startY; }
+    window.scrollTo(0, run);
+    if (elapsed < dur) rafId = requestAnimationFrame(step);
+  }
+  rafId = requestAnimationFrame(step);
+}
+
+/* ══════════════════════════════════════════════════
+   ENTRY GATE
+══════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function () {
+  var v = document.querySelector('[data-autoplay-fix="true"]');
+  if (!v) return;
+  
+  var gate = document.querySelector('.entry-gate') || v.parentElement;
+  var mainContent = document.getElementById('main-content');
+  
+  v.load();
+  
+  gate.addEventListener('click', function onGateTap () {
+    gate.removeEventListener('click', onGateTap);
+    v.currentTime = 0;
+    var playAttempt = v.play();
+    if (playAttempt !== undefined) {
+      playAttempt.catch(function () {
+        gate.addEventListener('click', function retryTap () {
+          gate.removeEventListener('click', retryTap);
+          v.play();
+        }, { once: true });
+      });
+    }
+    setAudio(true);
+  }, { once: true });
+  
+  v.addEventListener('ended', function () {
+    gate.style.transition = 'opacity 0.8s ease';
+    gate.style.opacity = '0';
+    setTimeout(function () {
+      gate.style.display = 'none';
+      gate.style.visibility = 'hidden';
+      if (mainContent) {
+        mainContent.style.visibility = 'visible';
+        mainContent.style.opacity = '1';
+      }
+      document.dispatchEvent(new Event('gateEnded'));
+    }, 800);
+  });
+});
+
+/* ══════════════════════════════════════════════════
+   MOMENTS — GSAP HORIZONTAL SCROLL
+══════════════════════════════════════════════════ */
+function initMoments() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+  const track = document.getElementById('moments-track');
+  const panels = gsap.utils.toArray('.moments-panel');
+  if (!track || !panels.length) return;
+  
+  gsap.to(panels, {
+    xPercent: -100 * (panels.length - 1),
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#moments-pin-trigger',
+      pin: true,
+      pinType: 'fixed', 
+      anticipatePin: 1, 
+      scrub: true,      
+      end: () => '+=' + track.offsetWidth,
+      invalidateOnRefresh: true 
+    }
+  });
+}
+
+document.addEventListener('gateEnded', function() {
+  const petalCvs = document.getElementById('petals-canvas');
+  if (petalCvs) petalCvs.classList.add('active');
+  document.body.style.overflow = 'auto';
+  initReveal(); 
+  initScratch();
+  initGame();
+  
+  setTimeout(() => {
+    ['wheel','touchstart','mousedown','keydown'].forEach(e => window.addEventListener(e, handleInteract, { passive: true }));
+  }, 1000);
+  
+  autoScrollTo = setTimeout(() => {
+    if (!userInteracted) {
+      const s = document.getElementById('scratch-section');
+      if (s) {
+          const targetY = s.getBoundingClientRect().top + window.scrollY + (s.offsetHeight / 2) - (window.innerHeight / 2);
+          smoothScroll(targetY, 2500);
+      }
+    }
+  }, 5000);
+});
+
+/* ══════════════════════════════════════════════════
+   SCRATCH CARDS
+══════════════════════════════════════════════════ */
+let doneCount = 0;
+
+function initScratch() {
+  ['sc-1','sc-2','sc-3'].forEach((id,i)=>{
+    setupScratch(id, i+1, ()=>{
+      doneCount++;
+      document.getElementById('hint-'+(i+1)).style.opacity='0';
+      document.getElementById('card-'+(i+1)).classList.add('glow');
+      if (doneCount===3) onAllScratched();
+    });
+  });
+}
+
+function setupScratch(canvasId, num, onDone) {
+  const cvs = document.getElementById(canvasId);
+  const wrap = cvs.parentElement;
+  const ctx = cvs.getContext('2d',{willReadFrequently:true});
+  const dpr = devicePixelRatio||1;
+  let ready=false, done=false, drawing=false;
+
+  function build() {
+    const r=wrap.getBoundingClientRect(), W=r.width, H=r.height;
+    cvs.width=W*dpr; cvs.height=H*dpr; ctx.scale(dpr,dpr);
+    const g=ctx.createLinearGradient(0,0,W,H);
+    g.addColorStop(0,'#D9A4A4'); g.addColorStop(.5,'#7A1F23'); g.addColorStop(1,'#D9B463');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    ctx.font="italic 500 13px 'Cormorant Garamond'";
+    ctx.fillStyle='rgba(255,255,255,.85)'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('scratch me',W/2,H/2);
+    ctx.globalCompositeOperation='destination-out';
+    ctx.lineJoin='round'; ctx.lineCap='round';
+    ctx.lineWidth=Math.max(42,W*.36);
+    ready=true;
+  }
+
+  function pos(e) {
+    const r=cvs.getBoundingClientRect(), s=e.touches?e.touches[0]:e;
+    return {x:s.clientX-r.left,y:s.clientY-r.top};
+  }
+
+  function start(e){if(!ready||done)return;drawing=true;e.preventDefault();const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)}
+  function move(e){if(!drawing||done)return;e.preventDefault();const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();ctx.beginPath();ctx.moveTo(p.x,p.y);check()}
+  function end(){drawing=false;if(ready&&!done)ctx.beginPath()}
+
+  function check(){
+    if(done)return;
+    const d=ctx.getImageData(0,0,cvs.width,cvs.height).data;
+    let clear=0;
+    for(let i=3;i<d.length;i+=4)if(d[i]===0)clear++;
+    if(clear/(cvs.width*cvs.height)>.48){
+      done=true;
+      cvs.style.transition='opacity .8s'; cvs.style.opacity='0';
+      setTimeout(()=>{cvs.style.display='none';onDone();},800);
+    }
+  }
+
+  cvs.addEventListener('mousedown',start);
+  cvs.addEventListener('mousemove',move);
+  window.addEventListener('mouseup',end);
+  cvs.addEventListener('touchstart',start,{passive:false});
+  cvs.addEventListener('touchmove',move,{passive:false});
+  window.addEventListener('touchend',end);
+  setTimeout(build,100);
+}
+
+function onAllScratched() {
+  const el = document.getElementById('locked');
+  el.classList.add('unlocked');
+  
+  // Force browser layout reflow before revealing
+  void el.offsetWidth;
+  
+  setTimeout(() => {
+    el.classList.add('visible');
+    initCountdown(); 
+    initStoryCarousel(); 
+    initEventExpand(); 
+    initReveal();
+    
+    setTimeout(() => {
+      if (typeof initMoments === 'function') {
+        initMoments();
+        setTimeout(() => {
+            if (typeof ScrollTrigger !== 'undefined') {
+                ScrollTrigger.refresh();
+            }
+        }, 1500);
+      }
+    }, 150);
+
+    const COLS=['#7A1F23','#B8893A','#D9B463','#F0E2C2','#A23A3A','#D85A8E'];
+    const opts={colors:COLS,zIndex:99999};
+    setTimeout(()=>confetti({...opts,particleCount:200,spread:100,origin:{x:.5,y:.65}}),100);
+    setTimeout(()=>confetti({...opts,particleCount:120,angle:60,spread:65,origin:{x:0,y:.7}}),400);
+    setTimeout(()=>confetti({...opts,particleCount:120,angle:120,spread:65,origin:{x:1,y:.7}}),600);
+    
+    setTimeout(()=>{
+      document.getElementById('countdown-section').scrollIntoView({behavior:'smooth',block:'center'});
+    }, 2500);
+  }, 50);
+}
+
+/* ══════════════════════════════════════════════════
+   COUNTDOWN — July 24, 2026
+══════════════════════════════════════════════════ */
+function initCountdown() {
+  const target = new Date('July 24, 2026 12:00:00 GMT+0530');
+  const els = {d:document.getElementById('cd-days'),h:document.getElementById('cd-hours'),m:document.getElementById('cd-mins'),s:document.getElementById('cd-secs')};
+  function tick(){
+    const diff=target-Date.now();
+    if(diff<=0){document.querySelector('.cd-grid').innerHTML="<p style='grid-column:1/-1;font-family:\"Great Vibes\",cursive;font-size:2.5rem;color:var(--sage-dark)'>Forever Begins Now 💍</p>";return;}
+    const fmt=n=>String(n).padStart(2,'0');
+    els.d.textContent=fmt(Math.floor(diff/86400000));
+    els.h.textContent=fmt(Math.floor((diff%86400000)/3600000));
+    els.m.textContent=fmt(Math.floor((diff%3600000)/60000));
+    els.s.textContent=fmt(Math.floor((diff%60000)/1000));
+  }
+  tick(); setInterval(tick,1000);
+}
+
+/* ══════════════════════════════════════════════════
+   STORY CAROUSEL
+══════════════════════════════════════════════════ */
+function initStoryCarousel() {
+  try {
+    const carousel = document.getElementById('story-carousel');
+    if (!carousel || carousel.dataset.inited === '1') return;
+
+    const track       = document.getElementById('story-track');
+    const slides      = track ? track.querySelectorAll('.story-slide') : [];
+    const dotsWrap    = document.getElementById('story-dots');
+    const progressEl  = document.getElementById('story-progress');
+    const prevBtn     = document.getElementById('story-prev');
+    const nextBtn     = document.getElementById('story-next');
+    const currentLbl  = document.getElementById('story-current');
+    const totalLbl    = document.getElementById('story-total');
+    const total       = slides.length;
+
+    if (!total || !track || !dotsWrap || !progressEl) return;
+    carousel.dataset.inited = '1';
+
+    let index = 0;
+    let isDragging = false;
+    let startX = 0, startY = 0, deltaX = 0;
+    let lockedAxis = null;
+
+    if (totalLbl) totalLbl.textContent = String(total).padStart(2, '0');
+
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'story-dot';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', 'Go to chapter ' + (i + 1) + ' of ' + total);
+      (function(idx) {
+        dot.addEventListener('click', function() { goTo(idx); });
+      })(i);
+      dotsWrap.appendChild(dot);
+    }
+
+    for (let i = 0; i < total; i++) {
+      const seg = document.createElement('div');
+      seg.className = 'story-progress-seg';
+      progressEl.appendChild(seg);
+    }
+    const segs = progressEl.querySelectorAll('.story-progress-seg');
+    const dots = dotsWrap.querySelectorAll('.story-dot');
+
+    function update() {
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === index);
+        d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+      segs.forEach(function(s, i) {
+        s.classList.toggle('done',   i < index);
+        s.classList.toggle('active', i === index);
+      });
+      if (currentLbl) currentLbl.textContent = String(index + 1).padStart(2, '0');
+      if (prevBtn) prevBtn.disabled = index === 0;
+      if (nextBtn) nextBtn.disabled = index === total - 1;
+    }
+
+    function goTo(i) {
+      index = Math.max(0, Math.min(total - 1, i));
+      update();
+    }
+    function next() { if (index < total - 1) goTo(index + 1); }
+    function prev() { if (index > 0)         goTo(index - 1); }
+
+    if (prevBtn) prevBtn.addEventListener('click', prev);
+    if (nextBtn) nextBtn.addEventListener('click', next);
+
+    carousel.setAttribute('tabindex', '0');
+    carousel.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); prev(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+      if (e.key === 'Home')       { e.preventDefault(); goTo(0); }
+      if (e.key === 'End')        { e.preventDefault(); goTo(total - 1); }
+    });
+
+    carousel.addEventListener('touchstart', function(e) {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      deltaX = 0;
+      lockedAxis = null;
+      track.style.transition = 'none';
+    }, { passive: true });
+
+    carousel.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      const x = e.touches[0].clientX;
+      const y = e.touches[0].clientY;
+      const dx = x - startX;
+      const dy = y - startY;
+      if (!lockedAxis) {
+        if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+          lockedAxis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+        }
+      }
+      if (lockedAxis === 'y') return;
+      deltaX = dx;
+      const offsetPct = (deltaX / carousel.offsetWidth) * 100;
+      track.style.transform = 'translateX(calc(-' + (index * 100) + '% + ' + offsetPct + '%))';
+    }, { passive: true });
+
+    function pointerUp() {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.transition = '';
+      if (lockedAxis === 'x') {
+        const threshold = carousel.offsetWidth * 0.18;
+        if (deltaX < -threshold && index < total - 1)      index++;
+        else if (deltaX >  threshold && index > 0)         index--;
+      }
+      update();
+      deltaX = 0;
+      lockedAxis = null;
+    }
+    carousel.addEventListener('touchend',    pointerUp);
+    carousel.addEventListener('touchcancel', pointerUp);
+
+    update();
+  } catch (err) {
+    console.warn('[Story Carousel] init failed:', err);
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   REVEAL ON SCROLL & EVENT VIDEOS
+══════════════════════════════════════════════════ */
+function initReveal() {
+  const items = document.querySelectorAll('.reveal:not(.revealed)');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('revealed'); io.unobserve(e.target); } });
+  },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  items.forEach(el=>io.observe(el));
+}
+
+function initEventExpand() {
+  const wraps = document.querySelectorAll('.evt-video');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('open'); io.unobserve(e.target); } });
+  },{threshold:.3});
+  wraps.forEach(w=>io.observe(w));
+}
+
+/* ══════════════════════════════════════════════════
+   MEMORY MATCH GAME
+══════════════════════════════════════════════════ */
+function initGame() {
+    const grid = document.getElementById('game-grid');
+    const movesEl = document.getElementById('game-moves');
+    const pairsEl = document.getElementById('game-pairs');
+    const winEl = document.getElementById('game-win');
+    const resetBtn = document.getElementById('game-reset');
+    if (!grid) return;
+    const ICONS = ['💍','💐','🌸','🪔','🥂','💝','🎉','🕊️'];
+    let first = null, lock = false, moves = 0, pairs = 0;
+
+    function build() {
+        grid.innerHTML = ''; winEl.classList.remove('show');
+        first = null; lock = false; moves = 0; pairs = 0;
+        movesEl.textContent = '0'; pairsEl.textContent = '0';
+        const deck = [...ICONS, ...ICONS].sort(() => Math.random() - 0.5);
+        deck.forEach(icon => {
+            const card = document.createElement('div');
+            card.className = 'mcard';
+            card.dataset.icon = icon;
+            card.innerHTML = `<div class="mcard-inner">
+                <div class="mcard-face mcard-back">♥</div>
+                <div class="mcard-face mcard-front">${icon}</div>
+            </div>`;
+            card.addEventListener('click', () => flip(card));
+            grid.appendChild(card);
+        });
+    }
+    function flip(card) {
+        if (lock || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+        card.classList.add('flipped');
+        if (!first) { first = card; return; }
+        moves++; movesEl.textContent = moves;
+        if (first.dataset.icon === card.dataset.icon) {
+            first.classList.add('matched'); card.classList.add('matched');
+            first = null; pairs++; pairsEl.textContent = pairs;
+            if (pairs === ICONS.length) {
+                winEl.classList.add('show');
+                if (typeof confetti === 'function') confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 }, colors: ['#B8893A','#D9B463','#7A1F23','#FBF6EE'] });
+            }
+        } else {
+            lock = true;
+            const a = first, b = card;
+            setTimeout(() => { a.classList.remove('flipped'); b.classList.remove('flipped'); first = null; lock = false; }, 750);
+        }
+    }
+    resetBtn.addEventListener('click', build);
+    build();
+}
+
+/* ══════════════════════════════════════════════════
+   RSVP LOGIC
+══════════════════════════════════════════════════ */
+document.querySelectorAll('input[name="attending"]').forEach(r => {
+    r.addEventListener('change', () => {
+        const decline = r.value === 'no';
+        ['guests-card','events-card','mood-card'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) { el.style.opacity = decline ? '0.4' : '1'; el.style.pointerEvents = decline ? 'none' : ''; }
+        });
+    });
+});
+
+const rsvpForm   = document.getElementById('rsvp-form');
+const submitBtn  = document.getElementById('submit-btn');
+const btnText    = document.getElementById('btn-text');
+const btnSpinner = document.getElementById('btn-spinner');
+
+rsvpForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    btnText.textContent = 'Sending...';
+    btnSpinner.style.display = 'inline';
+
+    const formData = new FormData(e.target);
+    const data = {};
+
+    for (let key of formData.keys()) {
+        const values = formData.getAll(key);
+        data[key] = values.length > 1 ? values.join(', ') : values[0];
+    }
+
+    data.clientId = 'MohitDhrumi-wedding-2026';
+
+    try {
+        const res = await fetch('https://wedding-backend-production-54c0.up.railway.app/api/rsvp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        const result = await res.json();
+
+        showModal(result.success ? 'success' : 'error');
+
+        if (result.success) {
+            e.target.reset();
+            document.querySelector('input[name="attending"][value="yes"]').checked = true;
+            ['guests-card','events-card','mood-card'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.style.opacity = '1'; el.style.pointerEvents = ''; }
+            });
+        }
+    } catch(err) {
+        showModal('error');
+    } finally {
+        submitBtn.disabled = false;
+        btnText.textContent = 'Send Love';
+        btnSpinner.style.display = 'none';
+    }
+});
+
+const modal      = document.getElementById('rsvp-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalMsg   = document.getElementById('modal-msg');
+const modalSucc  = document.getElementById('modal-success-svg');
+const modalErr   = document.getElementById('modal-error-svg');
+const modalIcon  = document.getElementById('modal-icon');
+const modalClose = document.getElementById('modal-close');
+
+function showModal(type) {
+    if (type === 'success') {
+        modalTitle.textContent = 'Thank You!';
+        modalMsg.textContent = "We can't wait to celebrate with you!";
+        modalSucc.style.display = '';
+        modalErr.style.display = 'none';
+        modalIcon.style.background = 'rgba(122,31,35,0.1)';
+    } else {
+        modalTitle.textContent = 'Oops!';
+        modalMsg.textContent = 'There was an error submitting your RSVP. Please try again.';
+        modalSucc.style.display = 'none';
+        modalErr.style.display = '';
+        modalIcon.style.background = 'rgba(220,38,38,0.08)';
+    }
+    modal.classList.add('open');
+}
+
+function closeModal() { modal.classList.remove('open'); }
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+</script>
+</body>
+</html>
